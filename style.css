@@ -1,241 +1,87 @@
 /* Darren 11+ Academy V1.1 */
 
 body {
-
-    font-family: Arial, Helvetica, sans-serif;
-
+    font-family: Arial, sans-serif;
     background: #f1f5f9;
-
     margin: 0;
-
     padding: 0;
-
-    color: #1f2937;
-
 }
-
-
 
 .container {
-
-    width: 90%;
-
-    max-width: 1000px;
-
-    margin: auto;
-
+    max-width: 900px;
+    margin: 30px auto;
     padding: 20px;
-
 }
-
-
-
-/* Header */
 
 header {
-
     text-align: center;
-
-    background: #1d4ed8;
-
-    color: white;
-
-    padding: 25px;
-
-    border-radius: 15px;
-
     margin-bottom: 20px;
-
 }
-
-
-
-header h1 {
-
-    margin: 0;
-
-    font-size: 32px;
-
-}
-
-
-
-header p {
-
-    margin-top: 10px;
-
-    font-size: 16px;
-
-}
-
-
-
-/* Dashboard Layout */
-
-.dashboard {
-
-    display: grid;
-
-    grid-template-columns: repeat(2, 1fr);
-
-    gap: 20px;
-
-}
-
-
-
-/* Cards */
 
 .card {
-
     background: white;
-
     padding: 20px;
-
-    margin: 20px 0;
-
-    border-radius: 15px;
-
-    box-shadow:
-
-    0 4px 10px rgba(0,0,0,0.1);
-
+    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.08);
 }
-
-
-
-.card h2 {
-
-    color: #1d4ed8;
-
-}
-
-
-
-/* Progress numbers */
-
-span {
-
-    font-weight: bold;
-
-    color: #059669;
-
-}
-
-
-
-/* Question */
-
-#question {
-
-    min-height: 60px;
-
-    font-size: 22px;
-
-}
-
-
-
-#options button {
-
-    display: block;
-
-    width: 100%;
-
-    padding: 12px;
-
-    margin: 10px 0;
-
-    border-radius: 8px;
-
-    border: 1px solid #cbd5e1;
-
-    background: #ffffff;
-
-    cursor: pointer;
-
-    font-size: 16px;
-
-}
-
-
-
-#options button:hover {
-
-    background: #dbeafe;
-
-}
-
-
-
-/* Main Button */
-
-button {
-
-    padding: 12px 25px;
-
-    border: none;
-
-    border-radius: 8px;
-
-    background: #2563eb;
-
-    color: white;
-
-    font-size: 16px;
-
-    cursor: pointer;
-
-}
-
-
-
-button:hover {
-
-    background: #1e40af;
-
-}
-
-
-
-/* Coach Box */
-
-#coachMessage {
-
-    background: #ecfdf5;
-
-    padding: 15px;
-
-    border-radius: 10px;
-
-}
-
-
-
-/* Mobile adjustment */
-
-@media(max-width:700px){
-
 
 .dashboard {
-
-    grid-template-columns: 1fr;
-
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
-
-.container {
-
-    width:95%;
-
+.dashboard .card {
+    flex: 1;
 }
 
-
-header h1 {
-
-    font-size:24px;
-
+/* Question buttons */
+#options button {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    margin: 10px 0;
+    border-radius: 10px;
+    border: 1px solid #cbd5e1;
+    background: #ffffff;
+    cursor: pointer;
+    font-size: 16px;
+    color: #1f2937; /* ✅ FIX: visible text */
+    transition: 0.2s;
 }
 
+#options button:hover {
+    background: #e0f2fe;
+}
 
+/* Selected answer */
+.selected {
+    background: #bfdbfe !important;
+    border: 2px solid #2563eb;
+}
+
+/* Correct / wrong (future-ready) */
+.correct {
+    background: #bbf7d0 !important;
+    border: 2px solid #16a34a;
+}
+
+.wrong {
+    background: #fecaca !important;
+    border: 2px solid #dc2626;
+}
+
+button {
+    padding: 12px 18px;
+    border: none;
+    background: #2563eb;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: #1d4ed8;
 }
