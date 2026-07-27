@@ -1,189 +1,103 @@
 // Darren 11+ Academy Main Engine
 
-
 let questions = [];
-
 let currentQuestion = 0;
-
+let answered = false;
 
 
 // Load questions
-
-
 fetch("data/questions.json")
-
 .then(response => response.json())
-
 .then(data => {
-
-
-questions = data;
-
-
-loadQuestion();
-
-
+    questions = data;
+    loadQuestion();
 });
-
-
 
 
 
 function loadQuestion(){
 
+    answered = false;
 
-let q = questions[currentQuestion];
+    let q = questions[currentQuestion];
 
+    document.getElementById("subject").innerText =
+    "Subject: " + q.subject;
 
+    document.getElementById("question").innerText =
+    q.question;
 
-document.getElementById(
-"subject"
-).innerText =
+    let html = "";
 
-"Subject: " + q.subject;
+    q.options.forEach(function(option,index){
 
+        html += `
+        <button onclick="checkAnswer(${index})">
+            ${option}
+        </button>
+        `;
 
+    });
 
-
-document.getElementById(
-"question"
-).innerText =
-
-q.question;
-
-
-
-let html = "";
-
-
-
-q.options.forEach(function(option,index){
-
-
-
-html +=
-
-`
-
-<button onclick="checkAnswer(${index})">
-
-${option}
-
-</button>
-
-`;
-
-
-
-});
-
-
-
-document.getElementById(
-"options"
-).innerHTML = html;
-
-
+    document.getElementById("options").innerHTML = html;
 
 }
-
-
-
-
 
 
 
 function checkAnswer(selected){
 
+    if(answered) return; // prevent multiple clicks
 
-let q = questions[currentQuestion];
+    answered = true;
 
+    let q = questions[currentQuestion];
 
+    let buttons = document.querySelectorAll("#options button");
 
-let correct =
+    // Highlight selected
+    buttons[selected].classList.add("selected");
 
-selected === q.answer;
+    let correct = selected === q.answer;
 
-
-
-
-updateProgress(
-q.subject,
-correct
-);
-
-
-
-
-if(correct){
-
-
-document.getElementById(
-"coachMessage"
-).innerText =
-
-"Excellent work Darren! Keep building accuracy.";
-
-}
-
-else{
+    // Show correct/wrong colors
+    buttons.forEach((btn, index) => {
+        if(index === q.answer){
+            btn.classList.add("correct");
+        }
+        if(index === selected && !correct){
+            btn.classList.add("wrong");
+        }
+    });
 
 
-document.getElementById(
-"coachMessage"
-).innerText =
+    updateProgress(q.subject, correct);
 
-"Good attempt. Review this topic and try again.";
+
+    if(correct){
+        document.getElementById("coachMessage").innerText =
+        "✅ Excellent work Darren!";
+    }
+    else{
+        document.getElementById("coachMessage").innerText =
+        "❌ Not quite. Review and try again.";
+    }
+
+    updateDashboard();
 
 }
-
-
-
-
-updateDashboard();
-
-
-
-}
-
-
-
-
 
 
 
 function nextQuestion(){
 
+    currentQuestion++;
 
+    if(currentQuestion >= questions.length){
+        alert("🎉 Practice Complete!");
+        currentQuestion = 0;
+    }
 
-currentQuestion++;
-
-
-
-
-if(currentQuestion >= questions.length){
-
-
-
-alert(
-
-"🎉 Practice Complete!"
-
-);
-
-
-
-currentQuestion = 0;
-
-
-
-}
-
-
-
-
-loadQuestion();
-
-
+    loadQuestion();
 
 }
