@@ -2,61 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Darren 11+ Academy</title>
+    <title>Darren 11+ Practice</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="container">
+    <h1>11+ Daily Practice</h1>
 
-    <header>
-        <h1>🎓 Darren 11+ Academy</h1>
-    </header>
-
-    <!-- Dashboard -->
-    <div class="dashboard">
-
-        <div class="card">
-            <h3>Progress</h3>
-            <p>Questions Completed: <span id="totalQuestions">0</span></p>
-            <p>Accuracy: <span id="accuracy">0</span>%</p>
-        </div>
-
-        <div class="card">
-            <h3>Subject Progress</h3>
-            <p>Maths: <span id="mathsProgress">0</span></p>
-            <p>English: <span id="englishProgress">0</span></p>
-            <p>VR: <span id="vrProgress">0</span></p>
-            <p>NVR: <span id="nvrProgress">0</span></p>
-        </div>
-
+    <div id="questionBox">
+        <h2 id="question">Loading...</h2>
     </div>
 
-    <!-- Daily Practice -->
-    <div class="card">
-        <h2>📘 Daily Practice</h2>
+    <div id="options" class="options"></div>
 
-        <p id="dailyProgress">Daily Progress: 0 / 100</p>
+    <p id="result"></p>
 
-        <p id="subject">Subject: Loading...</p>
-
-        <h3 id="question">Loading question...</h3>
-
-        <div id="options"></div>
-
-    </div>
-
-    <!-- AI Coach -->
-    <div class="card">
-        <h3>🤖 Darren AI Coach</h3>
-        <p id="coachMessage">Let's begin 🚀</p>
-    </div>
-
+    <button id="nextBtn" onclick="nextQuestion()" style="display:none;">Next</button>
 </div>
 
-<!-- Scripts -->
-<script src="js/progress.js"></script>
-<script src="js/dashboard.js"></script>
 <script src="app.js"></script>
 
 </body>
