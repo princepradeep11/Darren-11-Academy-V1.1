@@ -1,15 +1,32 @@
-// Darren 11+ Academy Main Engine
+// Darren 11+ Academy V1.2
 
 let questions = [];
-let currentQuestion = 0;
+let currentQuestionIndex = 0;
 let answered = false;
+
+// Daily tracking
+let dailyCount = 0;
+const DAILY_TARGET = 100;
+
+
+// Shuffle function
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
 
 
 // Load questions
 fetch("data/questions.json")
-.then(response => response.json())
+.then(res => res.json())
 .then(data => {
+
     questions = data;
+
+    shuffle(questions); // 🔥 random order
+
     loadQuestion();
 });
 
@@ -19,7 +36,14 @@ function loadQuestion(){
 
     answered = false;
 
-    let q = questions[currentQuestion];
+    if(dailyCount >= DAILY_TARGET){
+        document.getElementById("question").innerText =
+        "🎉 Daily Target Complete!";
+        document.getElementById("options").innerHTML = "";
+        return;
+    }
+
+    let q = questions[currentQuestionIndex];
 
     document.getElementById("subject").innerText =
     "Subject: " + q.subject;
@@ -29,14 +53,11 @@ function loadQuestion(){
 
     let html = "";
 
-    q.options.forEach(function(option,index){
-
+    q.options.forEach((option, index) => {
         html += `
         <button onclick="checkAnswer(${index})">
             ${option}
-        </button>
-        `;
-
+        </button>`;
     });
 
     document.getElementById("options").innerHTML = html;
@@ -47,20 +68,18 @@ function loadQuestion(){
 
 function checkAnswer(selected){
 
-    if(answered) return; // prevent multiple clicks
+    if(answered) return;
 
     answered = true;
 
-    let q = questions[currentQuestion];
-
+    let q = questions[currentQuestionIndex];
     let buttons = document.querySelectorAll("#options button");
 
-    // Highlight selected
     buttons[selected].classList.add("selected");
 
     let correct = selected === q.answer;
 
-    // Show correct/wrong colors
+    // Show correct/wrong
     buttons.forEach((btn, index) => {
         if(index === q.answer){
             btn.classList.add("correct");
@@ -70,20 +89,20 @@ function checkAnswer(selected){
         }
     });
 
-
     updateProgress(q.subject, correct);
 
+    dailyCount++;
 
-    if(correct){
-        document.getElementById("coachMessage").innerText =
-        "✅ Excellent work Darren!";
-    }
-    else{
-        document.getElementById("coachMessage").innerText =
-        "❌ Not quite. Review and try again.";
-    }
+    // Coach message
+    document.getElementById("coachMessage").innerText =
+    correct ? "✅ Excellent!" : "❌ Review this topic.";
 
     updateDashboard();
+
+    // Auto next after 1.5 sec
+    setTimeout(() => {
+        nextQuestion();
+    }, 1500);
 
 }
 
@@ -91,11 +110,11 @@ function checkAnswer(selected){
 
 function nextQuestion(){
 
-    currentQuestion++;
+    currentQuestionIndex++;
 
-    if(currentQuestion >= questions.length){
-        alert("🎉 Practice Complete!");
-        currentQuestion = 0;
+    if(currentQuestionIndex >= questions.length){
+        shuffle(questions);
+        currentQuestionIndex = 0;
     }
 
     loadQuestion();
