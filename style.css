@@ -1,87 +1,53 @@
-/* Darren 11+ Academy V1.1 */
-
 body {
     font-family: Arial, sans-serif;
-    background: #f1f5f9;
-    margin: 0;
-    padding: 0;
+    background: #f4f6f9;
+    text-align: center;
 }
 
 .container {
-    max-width: 900px;
-    margin: 30px auto;
-    padding: 20px;
-}
-
-header {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.card {
+    margin: 50px auto;
+    width: 60%;
     background: white;
     padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 12px;
-    box-shadow: 0px 4px 10px rgba(0,0,0,0.08);
+    border-radius: 10px;
 }
 
-.dashboard {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-}
-
-.dashboard .card {
-    flex: 1;
-}
-
-/* Question buttons */
-#options button {
+.options button {
     display: block;
     width: 100%;
-    padding: 14px;
+    padding: 12px;
     margin: 10px 0;
-    border-radius: 10px;
-    border: 1px solid #cbd5e1;
+    border: 1px solid #ccc;
     background: #ffffff;
     cursor: pointer;
     font-size: 16px;
-    color: #1f2937; /* ✅ FIX: visible text */
-    transition: 0.2s;
+    border-radius: 5px;
 }
 
-#options button:hover {
-    background: #e0f2fe;
+/* FIXED VISIBILITY ISSUE */
+.options button:hover {
+    background: #e6f0ff;
 }
 
-/* Selected answer */
+/* SELECTED OPTION */
 .selected {
-    background: #bfdbfe !important;
-    border: 2px solid #2563eb;
-}
-
-/* Correct / wrong (future-ready) */
-.correct {
-    background: #bbf7d0 !important;
-    border: 2px solid #16a34a;
-}
-
-.wrong {
-    background: #fecaca !important;
-    border: 2px solid #dc2626;
-}
-
-button {
-    padding: 12px 18px;
-    border: none;
-    background: #2563eb;
+    background: #007bff !important;
     color: white;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-top: 10px;
 }
 
-button:hover {
-    background: #1d4ed8;
+/* CORRECT ANSWER */
+.correct {
+    background: #28a745 !important;
+    color: white;
+}
+
+/* WRONG ANSWER */
+.wrong {
+    background: #dc3545 !important;
+    color: white;
+}
+
+#result {
+    font-weight: bold;
+    margin-top: 15px;
 }
