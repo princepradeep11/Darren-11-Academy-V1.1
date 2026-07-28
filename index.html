@@ -1,166 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Darren 11+ Academy</title>
-
-<link rel="stylesheet" href="style.css">
-
+    <meta charset="UTF-8">
+    <title>Darren 11+ Academy</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
-
 <body>
-
 
 <div class="container">
 
+    <header>
+        <h1>🎓 Darren 11+ Academy</h1>
+    </header>
 
-<header>
+    <!-- Dashboard -->
+    <div class="dashboard">
 
-<h1>🎓 Darren 11+ Academy</h1>
+        <div class="card">
+            <h3>Progress</h3>
+            <p>Questions Completed: <span id="totalQuestions">0</span></p>
+            <p>Accuracy: <span id="accuracy">0</span>%</p>
+        </div>
 
-<p>Personal Grammar School Preparation Platform</p>
+        <div class="card">
+            <h3>Subject Progress</h3>
+            <p>Maths: <span id="mathsProgress">0</span></p>
+            <p>English: <span id="englishProgress">0</span></p>
+            <p>VR: <span id="vrProgress">0</span></p>
+            <p>NVR: <span id="nvrProgress">0</span></p>
+        </div>
 
-</header>
+    </div>
 
+    <!-- Daily Practice -->
+    <div class="card">
+        <h2>📘 Daily Practice</h2>
 
+        <p id="dailyProgress">Daily Progress: 0 / 100</p>
 
-<section class="dashboard">
+        <p id="subject">Subject: Loading...</p>
 
+        <h3 id="question">Loading question...</h3>
 
-<div class="card">
+        <div id="options"></div>
 
-<h2>📊 Progress</h2>
+    </div>
 
-<p>
-Questions Completed:
-<span id="totalQuestions">0</span>
-</p>
-
-
-<p>
-Accuracy:
-<span id="accuracy">0%</span>
-</p>
-
-
-</div>
-
-
-
-
-<div class="card">
-
-<h2>🎯 Subject Progress</h2>
-
-<p>
-Maths:
-<span id="mathsProgress">0</span>
-</p>
-
-
-<p>
-English:
-<span id="englishProgress">0</span>
-</p>
-
-
-<p>
-VR:
-<span id="vrProgress">0</span>
-</p>
-
-
-<p>
-NVR:
-<span id="nvrProgress">0</span>
-</p>
-
+    <!-- AI Coach -->
+    <div class="card">
+        <h3>🤖 Darren AI Coach</h3>
+        <p id="coachMessage">Let's begin 🚀</p>
+    </div>
 
 </div>
 
-
-</section>
-
-
-
-
-
-<section class="practice card">
-
-
-<h2>📝 Daily Practice</h2>
-
-
-<p id="subject">
-Subject: Loading...
-</p>
-
-
-<h3 id="question">
-
-Loading question...
-
-</h3>
-
-
-
-<div id="options">
-
-</div>
-
-
-
-<button onclick="nextQuestion()">
-
-Next Question
-
-</button>
-
-
-
-</section>
-
-
-
-
-
-<section class="card">
-
-
-<h2>🤖 Darren AI Coach</h2>
-
-
-<p id="coachMessage">
-
-Complete questions to receive coaching advice.
-
-</p>
-
-
-</section>
-
-
-
-</div>
-
-
-
-
-
+<!-- Scripts -->
 <script src="js/progress.js"></script>
-
 <script src="js/dashboard.js"></script>
-
 <script src="app.js"></script>
 
-
-
 </body>
-
 </html>
