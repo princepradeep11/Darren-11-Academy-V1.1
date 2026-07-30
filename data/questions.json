@@ -15,11 +15,6 @@
     "answer": "54"
   },
   {
-    "question": "Which word means the same as 'happy'?",
-    "options": ["Sad", "Joyful", "Angry", "Tired"],
-    "answer": "Joyful"
-  },
-  {
     "question": "Find the missing number: 10, 20, 30, ?, 50",
     "options": ["35", "40", "45", "60"],
     "answer": "40"
