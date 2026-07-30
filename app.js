@@ -2,51 +2,69 @@ let questions = [];
 let currentIndex = 0;
 let answered = false;
 
-async function loadQuestions() {
-    const response = await fetch('data/questions.json');
-    questions = await response.json();
 
+// LOAD QUESTIONS
+fetch('./data/questions.json')
+.then(response => response.json())
+.then(data => {
+    questions = data;
+    console.log("Questions loaded:", questions.length);
     showQuestion();
-}
+})
+.catch(error => {
+    console.error("Error loading JSON:", error);
+    document.getElementById("question").innerText =
+        "❌ Failed to load questions.json";
+});
 
+
+// SHOW QUESTION
 function showQuestion() {
+
     answered = false;
-    document.getElementById("result").innerText = "";
-    document.getElementById("nextBtn").style.display = "none";
+
+    if (currentIndex >= questions.length) {
+        document.getElementById("question").innerText = "🎉 Completed!";
+        document.getElementById("options").innerHTML = "";
+        return;
+    }
 
     let q = questions[currentIndex];
 
     document.getElementById("question").innerText = q.question;
 
-    let optionsDiv = document.getElementById("options");
-    optionsDiv.innerHTML = "";
+    let optionsHTML = "";
 
     q.options.forEach(option => {
-        let btn = document.createElement("button");
-        btn.innerText = option;
-
-        btn.onclick = () => selectAnswer(btn, option, q.answer);
-
-        optionsDiv.appendChild(btn);
+        optionsHTML += `<button onclick="selectAnswer(this, '${option}', '${q.answer}')">${option}</button>`;
     });
+
+    document.getElementById("options").innerHTML = optionsHTML;
+
+    document.getElementById("result").innerText = "";
 }
 
-function selectAnswer(button, selected, correct) {
+
+// SELECT ANSWER
+function selectAnswer(btn, selected, correct) {
+
     if (answered) return;
+
     answered = true;
 
     let buttons = document.querySelectorAll("#options button");
 
-    buttons.forEach(btn => {
-        btn.disabled = true;
+    buttons.forEach(button => {
 
-        if (btn.innerText === correct) {
-            btn.classList.add("correct");
+        if (button.innerText === correct) {
+            button.classList.add("correct");
         }
 
-        if (btn.innerText === selected && selected !== correct) {
-            btn.classList.add("wrong");
+        if (button.innerText === selected && selected !== correct) {
+            button.classList.add("wrong");
         }
+
+        button.disabled = true;
     });
 
     if (selected === correct) {
@@ -55,20 +73,18 @@ function selectAnswer(button, selected, correct) {
         document.getElementById("result").innerText = "❌ Wrong!";
     }
 
-    document.getElementById("nextBtn").style.display = "inline-block";
-
-    // Auto next after 1.5 sec
-    setTimeout(nextQuestion, 1500);
 }
 
-function nextQuestion() {
-    currentIndex++;
 
-    if (currentIndex >= questions.length) {
-        currentIndex = 0; // restart
+// NEXT QUESTION
+function nextQuestion() {
+
+    if (!answered) {
+        alert("Please select an answer first!");
+        return;
     }
+
+    currentIndex++;
 
     showQuestion();
 }
-
-loadQuestions();
